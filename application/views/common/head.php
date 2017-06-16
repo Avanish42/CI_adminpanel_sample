@@ -25,6 +25,8 @@
 
     <!-- Animation Css -->
     <link href="<?php  echo base_url('assets/plugins/animate-css/animate.css'); ?>" rel="stylesheet" />
+    <link href="<?php  echo base_url('assets/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css'); ?>" rel="stylesheet" />
+    <link href="<?php  echo base_url('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css'); ?>" rel="stylesheet" />
 
     <!-- Custom Css -->
     <link href="<?php echo base_url( 'assets/css/style.css'); ?>" rel="stylesheet">

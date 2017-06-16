@@ -266,33 +266,56 @@
         <div class="menu">
             <ul class="list">
                 <li class="header">MAIN NAVIGATION</li>
-                <li>
+                <li class="active">
                     <a href="../../index.html">
                         <i class="material-icons">home</i>
                         <span>Home</span>
                     </a>
                 </li>
+
                 <li>
-                    <a href="../../pages/typography.html">
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">view_list</i>
+                        <span>Urls</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li>
+                            <a href="<?php echo base_url('Urls'); ?>">Show</a>
+                        </li>
+
+                        <li>
+                            <a href="<?php echo base_url('Urls/urls_create'); ?>">Create</a>
+                        </li>
+                    </ul>
+
+                <li>
+                    <a href="<?php echo base_url('Urls'); ?>" >
                         <i class="material-icons">text_fields</i>
-                        <span>Typography</span>
+                        <span>URLs</span>
                     </a>
                 </li>
                 <li>
                     <a href="../../pages/helper-classes.html">
                         <i class="material-icons">layers</i>
-                        <span>Helper Classes</span>
+                        <span>Email Template</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="../../pages/helper-classes.html">
+                        <i class="material-icons">layers</i>
+                        <span>Business Type</span>
                     </a>
                 </li>
                 <li>
                     <a href="javascript:void(0);" class="menu-toggle">
                         <i class="material-icons">widgets</i>
-                        <span>Widgets</span>
+                        <span>Email Template</span>
                     </a>
                     <ul class="ml-menu">
                         <li>
-                            <a href="javascript:void(0);" class="menu-toggle">
-                                <span>Cards</span>
+                            <a href="" class="menu-toggle">
+                                <span>Create </span>
                             </a>
                             <ul class="ml-menu">
                                 <li>
@@ -503,7 +526,7 @@
                         <li>
                             <a href="../../pages/examples/forgot-password.html">Forgot Password</a>
                         </li>
-                        <li class="active">
+                        <li >
                             <a href="../../pages/examples/blank.html">Blank Page</a>
                         </li>
                         <li>
