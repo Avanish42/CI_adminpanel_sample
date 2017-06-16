@@ -13,6 +13,9 @@ class Webservice extends CI_Controller
         $this -> load -> library('form_validation');
         $this -> load -> model('Login_model');
         $this -> load -> model('Url_model');
+        $this -> load -> model('Merchant_model');
+        $this -> load -> helper('string_helper');
+
     }
 
     public function Get_all_business()
@@ -49,7 +52,11 @@ class Webservice extends CI_Controller
              $data['urls'] = array();
              $url_array = explode(',', $all_urls[0]->url);
              foreach ($url_array as $value) {
-                 array_push($data['urls'], $value);
+                    $url_string['url']=$value;
+                 $allpos=strpos_all($value,'.');
+                 $url_string['url_name']=substr($value,$allpos[0]+1,$allpos[1]-$allpos[0]-1);
+
+                 array_push($data['urls'],$url_string );
              }
          }
              if ($data) {
@@ -66,6 +73,96 @@ class Webservice extends CI_Controller
              }
              echo json_encode($raw_data);
              // echo json_encode($data);
+
+     }
+
+     public function signup_api()
+     {
+         $fullname=$this->input->post('fullname');
+         $email=$this->input->post('email');
+
+         $password=$this->input->post('password');
+         $birthday=$this->input->post('birthday');
+         $image=$this->input->post('image');
+         // print_r($file);
+         $this->load->library('upload');
+         $check_user=$this->Merchant_model->check_merchant($email);
+//check email already exists or not 
+         if(!$check_user)
+         {
+
+         $config['upload_path']   = './assets/images/'; 
+         $config['allowed_types'] = 'gif|jpg|png|jpeg'; 
+         $config['max_size']      = 10000; 
+         $config['file_name']     = time().$fullname;
+         $this->upload->initialize($config);
+         $updatedbarimage="";
+         if ( $this->upload->do_upload('image'))
+         {
+            // echo " uploaded";
+             $updatedbarimage='assets/images/'.$this->upload->data('file_name'); 
+         }
+         else   {
+//            echo $this->upload->display_errors();
+                }
+
+         $data['fullname']=$fullname;
+         $data['email']=$email;
+         $data['password']=md5($password);
+         $data['birthday']=$birthday;
+         $data['image']=$updatedbarimage;
+
+         if(  $this->Merchant_model->merchant_insert($data))
+         {
+                        $data['image']= $updatedbarimage?base_url($updatedbarimage):"";
+                    $raw_data=array('status'=>"true",
+                                     'message'=>"Register Successfull",
+                                     "data" =>   $data
+                                        );
+         }
+         else
+         {
+             $raw_data=array('status'=>"false",
+                                     'message'=>"data not inserted",
+                                     "data" => ""
+                                        );
+         }
+     }
+     else
+     {
+        $raw_data=array('status'=>"false",
+                                     'message'=>"Email Already Exist",
+                                     "data" => ""
+                                        );
+
+     }
+
+         echo json_encode($raw_data);
+
+     }
+     public function login_api()
+     {
+         $email=$this->input->post('email');
+         $password=$this->input->post('password');
+         $result= $this->Merchant_model->login($email,$password);
+         if($result)
+         {
+            $result[0]->password="*********";
+            $result[0]->image= base_url($result[0]->image);
+
+             $raw_data=array('status'=>"true",
+                                     'message'=>"Login Successfull",
+                                     "data" => $result[0]
+                                        );
+         }
+          else{
+             $raw_data=array('status'=>"false",
+                                     'message'=>"Login Failed",
+                                     "data" =>  ""
+                                        );
+          }
+
+          echo json_encode($raw_data);
 
      }
 }

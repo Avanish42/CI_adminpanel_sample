@@ -24,11 +24,19 @@ class Apidetails extends CI_Controller
     {
         $this ->load ->view('api_views/allbusiness.php');
 
-
     }
     public function get_all_url_by_business()
     {
         $this->load->view('api_views/get_all_url_by_business.php');
+    }
+
+    public function signup()
+    {
+        $this->load->view('api_views/signup.php');
+    }
+    public function login()
+    {
+        $this->load->view('api_views/login.php');
     }
 
 
