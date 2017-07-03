@@ -20,12 +20,17 @@ class Merchant_model extends CI_Model
         $this -> db -> from('merchant');
         $query = $this -> db -> get();
         return $query->result();
-
-
     }
     public function  check_merchant($email)
     {
     	$this->db->where('email',$email);
+        $this -> db -> from('merchant');
+        $query = $this -> db -> get();
+        return $query->result();
+    }
+
+    public function get_all_merchant()
+    {
         $this -> db -> from('merchant');
         $query = $this -> db -> get();
         return $query->result();

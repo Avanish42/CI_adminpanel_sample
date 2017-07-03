@@ -92,7 +92,7 @@ class Webservice extends CI_Controller
          {
 
          $config['upload_path']   = './assets/images/'; 
-         $config['allowed_types'] = 'gif|jpg|png|jpeg'; 
+         $config['allowed_types'] = 'gif|jpg|jpeg|png';
          $config['max_size']      = 10000; 
          $config['file_name']     = time().$fullname;
          $this->upload->initialize($config);

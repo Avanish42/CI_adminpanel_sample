@@ -12,14 +12,18 @@ class Merchant extends CI_Controller
         $this -> load -> database();
         $this -> load -> library('form_validation');
         $this -> load -> model('Login_model');
+        $this -> load -> model('Merchant_model');
     }
 
     public function index()
     {
+        $data['merchant']=$this->Merchant_model->get_all_merchant();
+//        print_r($data);
+//        exit();
 //        echo "you are sign in ";
         $this -> load -> view('common/head.php');
         $this->load->view('common/sidebar.php');
-        $this->load->view('merchant_view.php');
+        $this->load->view('merchant_view.php',$data);
         $this -> load -> view('common/footer.php');
     }
 
